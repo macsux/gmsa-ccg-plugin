@@ -1,0 +1,24 @@
+apiVersion: windows.k8s.io/v1alpha1
+kind: GMSACredentialSpec
+metadata:
+  name: aks-gmsa-spec  # This name can be changed, but it will be used as a reference in the pod spec
+credspec:
+  ActiveDirectoryConfig:
+    GroupManagedServiceAccounts:
+    - Name: gmsa1
+      Scope: ALMIREX
+    - Name: gmsa1
+      Scope: almirex.dc
+    HostAccountConfig:
+      PluginGUID: '{CCC2A336-D7F3-4818-A213-272B7924213E}'
+      PortableCcgVersion: "1"
+      PluginInput: ObjectId=3d2d8ea3-b633-49c7-94f8-8b5ff7f5500c;SecretUri=https://macsux-vault.vault.azure.net/secrets/GMSADomainUserCred  # SECRET_URI takes the form https://$akvName.vault.azure.net/secrets/$akvSecretName
+  CmsPlugins:
+  - ActiveDirectory
+  DomainJoinConfig:
+    DnsName: almirex.dc
+    DnsTreeName: almirex.dc
+    Guid:  ddc143be-b9dc-411a-9ece-ef50d65172f0
+    MachineAccountName: gmsa1
+    NetBiosName: ALMIREX
+    Sid: S-1-5-21-3483396884-3677748265-799010679

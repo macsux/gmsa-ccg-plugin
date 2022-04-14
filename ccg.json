@@ -1,0 +1,30 @@
+{
+  "CmsPlugins":  [
+    "ActiveDirectory"
+  ],
+  "DomainJoinConfig":  {
+    "Sid":  "S-1-5-21-3483396884-3677748265-799010679",
+    "MachineAccountName":  "gmsa1",
+    "Guid":  "ddc143be-b9dc-411a-9ece-ef50d65172f0",
+    "DnsTreeName":  "almirex.dc",
+    "DnsName":  "almirex.dc",
+    "NetBiosName":  "ALMIREX"
+  },
+  "ActiveDirectoryConfig":  {
+    "GroupManagedServiceAccounts":  [
+      {
+        "Name":  "gmsa1",
+        "Scope":  "almirex.dc"
+      },
+      {
+        "Name":  "gmsa1",
+        "Scope":  "ALMIREX"
+      }
+    ],
+    "HostAccountConfig": {
+      "PortableCcgVersion": "1",
+      "PluginGUID": "{DEFFF03C-3245-465F-8391-CC586A2D1F32}",
+      "PluginInput": "contoso.com:gmsaccg:<password>"
+    }
+  }
+}

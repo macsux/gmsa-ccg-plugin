@@ -1,0 +1,30 @@
+{
+  "CmsPlugins":  [
+    "ActiveDirectory"
+  ],
+  "DomainJoinConfig":  {
+    "Sid":  "S-1-5-21-3483396884-3677748265-799010679",
+    "MachineAccountName":  "gmsa1",
+    "Guid":  "ddc143be-b9dc-411a-9ece-ef50d65172f0",
+    "DnsTreeName":  "almirex.dc",
+    "DnsName":  "almirex.dc",
+    "NetBiosName":  "ALMIREX"
+  },
+  "ActiveDirectoryConfig":  {
+    "GroupManagedServiceAccounts":  [
+      {
+        "Name":  "gmsa1",
+        "Scope":  "almirex.dc"
+      },
+      {
+        "Name":  "gmsa1",
+        "Scope":  "ALMIREX"
+      }
+    ],
+    "HostAccountConfig": {
+      "PortableCcgVersion": "1",
+      "PluginGUID": "{CCC2A336-D7F3-4818-A213-272B7924213E}",
+      "PluginInput": "ObjectId=3d2d8ea3-b633-49c7-94f8-8b5ff7f5500c;SecretUri=https://macsux-vault.vault.azure.net/secrets/GMSADomainUserCred"
+    }
+  }
+}
