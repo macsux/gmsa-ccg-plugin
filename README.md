@@ -61,7 +61,18 @@ https://docs.microsoft.com/en-us/windows/win32/api/ccgplugins/nf-ccgplugins-iccg
 
    Change `PluginInput` to use account you created in step 3 that is allowed to retrieve gMSA credentials.
 
-6. Ensure that the domain controller is reachable on the following ports
+6. Change COM-component settings to run as NETWORK SERVICE LOCAL SYSTEM.
+   Run this:
+   ```
+   $comAdmin = New-Object -comobject COMAdmin.COMAdminCatalog
+   $apps = $comAdmin.GetCollection("Applications")
+   $apps.Populate()
+   $app = $apps | Where-Object {$_.Name -eq "CcgPlugin"}
+   $app.Value("Identity") = "NT AUTHORITY\NetworkService"
+   $apps.SaveChanges()
+   ```
+
+7. Ensure that the domain controller is reachable on the following ports
 
    | Protocol and port | Purpose  |
    | :---------------- | :------- |
@@ -71,13 +82,13 @@ https://docs.microsoft.com/en-us/windows/win32/api/ccgplugins/nf-ccgplugins-iccg
    | TCP and UDP 389   | LDAP     |
    | TCP 636           | LDAP SSL |
 
-5. Launch container by passing in name of credential spec json as parameter like this (only filename - not path)
+8. Launch container by passing in name of credential spec json as parameter like this (only filename - not path)
 
    ```
    docker run --security-opt "credentialspec=file://credspec.json" -it mcr.microsoft.com/windows/servercore:ltsc2019 powershell
    ```
 
-6. Verify that Kerberos ticket can be obtained by invoking. 
+9. Verify that Kerberos ticket can be obtained by invoking. 
 
    ```
    klist get <MY_GMSA_ACCOUNT>
